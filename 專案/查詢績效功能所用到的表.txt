@@ -1,0 +1,52 @@
+# 0 - 查詢客戶及RM資訊-績效明細(近一年)(726~722)By Month   (ok)
+
+```sql
+dbo_RM_Performance  -- 資料表
+INNER JOIN [0 - 查詢PDP月底所屬-000000(名稱)]   -- ok
+LEFT JOIN [業檢 - 查詢RM名單(PDP)]   -- ok
+```
+
+# 0 - 查詢PDP月底所屬-000000(名稱)  (ok)
+```sql
+FROM 
+	(([0 - 查詢PDP月底所屬-000000]  -- ok
+	LEFT JOIN [0 - 查詢客戶及RM資訊(精簡+)]  -- ok
+	LEFT JOIN [業檢 - 查詢RM名單(PDP)]   -- ok
+	LEFT JOIN [20250101 - 2025 RM PDP基期]  -- 資料表
+```
+
+# 0 - 查詢PDP月底所屬-000000 (ok)
+```sql
+FROM dbo_PDPClient  -- 資料表
+```
+
+# 0 - 查詢客戶及RM資訊(精簡+)  (ok)
+```sql
+FROM ((((
+	dbo_ClientData  -- 資料表
+	LEFT JOIN 查詢區域中心RM名單All  -- ok
+	LEFT JOIN [0 - 查詢集團戶(eLoan)-LocalDB] -- 資料表
+	LEFT JOIN COUNTRY_CODES  -- 資料表
+	LEFT JOIN dbo_CarbonEmission -- 資料表
+	LEFT JOIN dbo_Syndication_Loan_Curr  -- 資料表
+```
+
+# 查詢區域中心RM名單All  (ok)
+```sql
+FROM 
+	dbo_RMData -- 資料表
+	INNER JOIN 查詢區域中心All  -- ok
+	LEFT JOIN dbo_AllEmp  -- 資料表
+```
+
+#  查詢區域中心All (ok)
+```sql
+FROM 
+	dbo_AreaData  -- 資料表
+```
+
+# 業檢 - 查詢RM名單(PDP)   (ok)
+```sql
+FROM 
+	dbo_RM名單  -- 資料表
+```

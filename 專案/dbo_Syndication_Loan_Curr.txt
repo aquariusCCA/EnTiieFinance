@@ -1,0 +1,25 @@
+#視圖
+```sql
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`10.253.149.168` SQL SECURITY DEFINER VIEW `syndication_loan_curr` AS 
+select 
+	`syndication_loan`.`YYYY` AS `YYYY`,
+	`syndication_loan`.`ClientCd` AS `ClientCd`,
+	`syndication_loan`.`Syndicated_Loan_Ind` AS `Syndicated_Loan_Ind`,
+	`syndication_loan`.`Syndicated_Loan_Count` AS `Syndicated_Loan_Count` 
+from 
+	`syndication_loan` 
+where (
+	`syndication_loan`.`YYYY` = (select max(`syndication_loan`.`YYYY`) from `syndication_loan`)
+)
+```
+
+# 原始表: syndication_loan
+```sql
+CREATE TABLE `syndication_loan` (
+  `YYYY` varchar(4) NOT NULL,
+  `ClientCd` varchar(45) NOT NULL,
+  `Syndicated_Loan_Ind` varchar(1) DEFAULT NULL,
+  `Syndicated_Loan_Count` int(11) DEFAULT '0',
+  PRIMARY KEY (`YYYY`,`ClientCd`)
+) ENGINE=InnoDB DEFAULT CHARSET=big5
+```

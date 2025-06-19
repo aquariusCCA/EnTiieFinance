@@ -1,0 +1,113 @@
+# 視圖
+```sql
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `allemp` AS 
+select 
+	`depdata`.`Arrange` AS `Arrange`,
+	`hrdata`.`BUCd` AS `BUCd`,
+	`hrdata`.`EmpNr` AS `EmpNr`,
+	`hrdata`.`EmpNameC` AS `EmpNameC`,
+	`hrdata`.`EmpEmail` AS `EmpEmail`,
+	`hrdata`.`AreaHead` AS `AreaHead`,
+	`hrdata`.`JobDescription` AS `JobDescription`,
+	`hrdata`.`DepCd` AS `DepCd`,
+	`hrdata`.`DepSubCd` AS `DepSubCd`,
+	`hrdata`.`JobPositionDescription` AS `JobPositionDescription`,
+	`hrdata`.`JobPositionCd` AS `JobPositionCd`,
+	`hrdata`.`JobPositionLevel` AS `JobPositionLevel`,
+	`hrdata`.`Remark` AS `Remark`,
+	`hrdata`.`UnattendedInfo` AS `UnattendedInfo`,
+	`hrdata`.`MA` AS `MA`,
+	`hrdata`.`ID` AS `ID`,
+	`hrdata`.`DOB` AS `DOB`,
+	`hrdata`.`BUDepCd` AS `BUDepCd`,
+	`hrdata`.`BUDepSubCd` AS `BUDepSubCd`,
+	`hrdata`.`LastUpdateDateTime` AS `LastUpdateDateTime`,
+	`depdata`.`DepName` AS `DepName`,
+	`depdata`.`DepNameS` AS `DepNameS`,
+	`depsubdata`.`DepSubName` AS `DepSubName`,
+	`depdata`.`ManagerEmpNr` AS `ManagerEmpNr`,
+	`hrdata_1`.`EmpNameC` AS `DepManagerEmpNameC`,
+	`hrdata`.`StatusCd` AS `StatusCd`,
+	`hrdata`.`Party_ID` AS `Party_ID`,
+	`hrdata`.`EmpStartDate` AS `EmpStartDate`,
+	`hrdata`.`EmpQuitDate` AS `EmpQuitDate`,
+	`hrdata`.`JobStartDate` AS `JobStartDate`,
+	`hrdata`.`分機` AS `分機` 
+from (((
+	`hrdata` 
+left join 
+	`depdata` on((`depdata`.`DepCd` = `hrdata`.`DepCd`))) 
+left join 
+	`hrdata` `hrdata_1` on((`hrdata_1`.`EmpNr` = `depdata`.`ManagerEmpNr`))) 
+left join 
+	`depsubdata` on((`depsubdata`.`DepSubCd` = `hrdata`.`DepSubCd`)))
+order by 
+	`hrdata`.`BUCd`,
+	`depdata`.`Arrange`,
+	`hrdata`.`EmpNr`
+```
+
+# hrdata
+```sql
+CREATE TABLE `hrdata` (
+  `BUCd` varchar(10) DEFAULT NULL,
+  `EmpNr` varchar(10) NOT NULL,
+  `EmpNameC` varchar(20) DEFAULT NULL,
+  `EmpEmail` varchar(100) DEFAULT NULL,
+  `StatusCd` varchar(1) DEFAULT NULL,
+  `AreaHead` varchar(1) DEFAULT NULL,
+  `JobDescription` varchar(100) DEFAULT NULL,
+  `DepCd` varchar(3) DEFAULT NULL,
+  `DepSubCd` varchar(5) DEFAULT NULL,
+  `JobPositionDescription` varchar(100) DEFAULT NULL,
+  `JobPositionCd` varchar(255) DEFAULT NULL,
+  `JobPositionLevel` int(11) DEFAULT NULL,
+  `Remark` varchar(255) DEFAULT NULL,
+  `UnattendedInfo` varchar(255) DEFAULT NULL,
+  `MA` varchar(255) DEFAULT NULL,
+  `EmpStartDate` datetime DEFAULT NULL,
+  `EmpQuitDate` date DEFAULT NULL,
+  `EmpJobChange_Desc` varchar(45) DEFAULT NULL,
+  `JobStartDate` datetime DEFAULT NULL,
+  `Party_ID` varchar(255) DEFAULT NULL,
+  `ID` varchar(20) DEFAULT NULL,
+  `DOB` date DEFAULT NULL,
+  `BUDepCd` varchar(30) DEFAULT NULL,
+  `BUDepSubCd` varchar(30) DEFAULT NULL,
+  `LastUpdateDateTime` datetime DEFAULT NULL,
+  `分機` varchar(3) DEFAULT NULL,
+  `UpdateStamp` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`EmpNr`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+```
+
+# depdata
+```sql
+CREATE TABLE `depdata` (
+  `Arrange` varchar(2) CHARACTER SET utf8 DEFAULT NULL,
+  `BUCd` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `DepCd` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `DepName` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `DepNameS` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `DepOpenDate` datetime DEFAULT NULL,
+  `ManagerEmpNr` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `Chinese_Address` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `BUDepCd` varchar(30) CHARACTER SET utf8 DEFAULT NULL,
+  `LastUpdateDateTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`BUCd`,`DepCd`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+```
+
+# depsubdata
+```sql
+CREATE TABLE `depsubdata` (
+  `BuCd` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `DepCd` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `DepSubCd` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `DepSubName` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `DepSubOpenDate` datetime DEFAULT NULL,
+  `BuDepSubCd` varchar(30) CHARACTER SET utf8 DEFAULT NULL,
+  `LastUpdateDateTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`BuCd`,`DepCd`,`DepSubCd`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+```

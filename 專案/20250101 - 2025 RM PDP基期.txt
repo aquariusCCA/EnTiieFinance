@@ -1,0 +1,21 @@
+
+CREATE TABLE `20250101-2025_rm_pdp_baseperiod` (
+  `ClientCd` varchar(50) NOT NULL,
+  `2024/01-12總收益` decimal(18,2) DEFAULT '0.00',
+  `2024/01-12放款利收` decimal(18,2) DEFAULT '0.00',
+  `2024/01-12存款利收` decimal(18,2) DEFAULT '0.00',
+  `2024/01-12法金手收` decimal(18,2) DEFAULT '0.00',
+  `2024/01-12TMU收益` decimal(18,2) DEFAULT '0.00',
+  `2024/01-12其他非利收` decimal(18,2) DEFAULT '0.00',
+  `2024/09-11放款均額` decimal(18,2) DEFAULT '0.00',
+  `2024/09-11放款均額台幣` decimal(18,2) DEFAULT '0.00',
+  `2024/09-11放款均額外幣` decimal(18,2) DEFAULT '0.00',
+  `2024/09-11台幣活存均額` decimal(18,2) DEFAULT '0.00',
+  `2024/09-11台幣定存均額` decimal(18,2) DEFAULT '0.00',
+  `2024/09-11美元活存均額` decimal(18,2) DEFAULT '0.00',
+  `2024/09-11美元定存均額` decimal(18,2) DEFAULT '0.00',
+  `2024/09-11雜幣活存均額` decimal(18,2) DEFAULT '0.00',
+  `2024/09-11雜幣定存均額` decimal(18,2) DEFAULT '0.00',
+  `最後更新日期時間` varchar(19) DEFAULT '',
+  PRIMARY KEY (`ClientCd`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='對應20250101 - 2025 RM PDP基期'

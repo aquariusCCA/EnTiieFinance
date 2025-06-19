@@ -1,0 +1,11 @@
+CREATE TABLE `pdpclient` (
+  `Data_Month` varchar(13) NOT NULL,
+  `ClientCd` varchar(45) NOT NULL,
+  `AreaCd` varchar(3) NOT NULL,
+  `RMEmpNr` varchar(5) NOT NULL,
+  `Deleted` varchar(1) DEFAULT 'N',
+  `信評` varchar(3) DEFAULT '',
+  `Remark` varchar(200) DEFAULT NULL,
+  `上市櫃` varchar(45) DEFAULT '',
+  PRIMARY KEY (`Data_Month`,`ClientCd`)
+) ENGINE=InnoDB DEFAULT CHARSET=big5

@@ -1,0 +1,22 @@
+CREATE TABLE `areadata` (
+  `LevelCd` varchar(20) DEFAULT NULL,
+  `AreaCd` varchar(5) NOT NULL,
+  `BudgetAreaCd` varchar(6) NOT NULL,
+  `AreaName` varchar(100) DEFAULT NULL,
+  `AreaNameS` varchar(100) DEFAULT NULL,
+  `AreaNameE` varchar(30) DEFAULT NULL,
+  `BudgetAreaNameS` varchar(100) DEFAULT NULL,
+  `Arrange` varchar(2) DEFAULT NULL,
+  `AreaManager` varchar(10) DEFAULT NULL,
+  `AreaManagerEmpNr` varchar(5) DEFAULT NULL,
+  `BlockCd` varchar(1) DEFAULT NULL,
+  `BlockManager` varchar(10) DEFAULT NULL,
+  `BlockManagerEmpNr` varchar(5) DEFAULT NULL,
+  `Location` varchar(10) DEFAULT NULL,
+  `BlockName` varchar(10) DEFAULT NULL,
+  `BlockArea` varchar(100) DEFAULT NULL,
+  `RegionCd` varchar(2) DEFAULT NULL,
+  `WithEBS` varchar(1) DEFAULT NULL,
+  `StatusCd` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`AreaCd`,`BudgetAreaCd`)
+) ENGINE=InnoDB DEFAULT CHARSET=big5

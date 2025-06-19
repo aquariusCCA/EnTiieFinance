@@ -1,0 +1,37 @@
+Sub Login_Click(ByVal sender As Object, ByVal e As EventArgs)
+        
+        Dim adPath As String = "LDAP://dc=entiebank, dc=com, dc=tw"
+        Dim adAuth As LdapAuthentication = New LdapAuthentication(adPath)
+        
+        Try
+            If (True = adAuth.IsAuthenticated("entiebank", txtUsername.Text, txtPassword.Text)) Then
+                Dim groups As String = adAuth.GetGroups()
+                Dim arrGroup As String() = groups.Split("|")
+                
+                Dim PermissionMan As New PermissionManager()
+                Dim userDAO As UsersDAO = PermissionMan.GetUserInfo(txtUsername.Text)
+                '20120217 add CloseConnection
+                PermissionMan.CloseConnection()
+				if arrGroup(0) = "SAMS" Then
+					userDAO.DepCode_AD = arrGroup(1).Substring(0, 3)
+				else
+					userDAO.DepCode_AD = arrGroup(0).Substring(0, 5)
+				end if
+
+                If String.IsNullOrEmpty(userDAO.EmpCode) Then
+                    errorLabel.Text = "沒有使用本系統的權限！(" & userDAO.ErrorMsg & ")"
+                    
+                Else
+                    Session("UserInfo") = userDAO
+                    Dim strDefaultPage As String = "EmptyPage2.aspx"
+                    Response.Redirect(strDefaultPage)
+                End If
+                
+            Else
+                errorLabel.Text = "登入失敗 !"
+            End If
+ 
+        Catch ex As Exception
+            errorLabel.Text = ex.Message & adAuth.GetGroups()
+        End Try
+    End Sub

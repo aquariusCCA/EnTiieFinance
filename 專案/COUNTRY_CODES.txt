@@ -1,0 +1,9 @@
+> 已經在 MySQL 創建好表格
+
+
+CREATE TABLE `country_codes` (
+  `Country_Code` char(3) NOT NULL DEFAULT '',
+  `Country_Name` varchar(100) NOT NULL DEFAULT '' COMMENT '國家全名',
+  `Country_Name_Abbr` varchar(20) NOT NULL DEFAULT '' COMMENT '國家名稱縮寫',
+  PRIMARY KEY (`Country_Code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='對應 COUNTRY_CODES'
